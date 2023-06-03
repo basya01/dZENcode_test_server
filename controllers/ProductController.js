@@ -1,12 +1,12 @@
 import { ProductType } from '../db/models/index.js';
 
 class ProductController {
-  async getAllTypes(req, res) {
+  async getAllTypes(req, res, next) {
     try {
       const types = await ProductType.findAll();
       res.json(types);
-    } catch (error) {
-      res.status(500).json({ message: 'Unexpected error' });
+    } catch (e) {
+      next(e);
     }
   }
 }
