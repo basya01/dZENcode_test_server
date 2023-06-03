@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express, { json } from 'express';
 import cors from 'cors';
-import { productsRouter } from './routes/index.js';
+import { productsRouter, ordersRouter } from './routes/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config();
@@ -12,6 +12,7 @@ app.use(cors());
 app.use(json());
 
 app.use('/products', productsRouter);
+app.use('/orders', ordersRouter);
 
 app.use('/uploads', express.static('uploads'));
 

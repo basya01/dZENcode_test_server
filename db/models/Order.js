@@ -9,8 +9,7 @@ const Order = sequelize.define(
     description: DataTypes.TEXT,
   },
   {
-    createdAt: 'date',
-    timestamps: false,
+    updatedAt: false,
   }
 );
 
