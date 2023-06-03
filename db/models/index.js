@@ -1,0 +1,4 @@
+export { default as Product } from './Product.js';
+export { default as ProductType } from './ProductType.js';
+export { default as Guarantee } from './Guarantee.js';
+export { default as Price } from './Price.js';
