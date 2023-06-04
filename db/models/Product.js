@@ -37,6 +37,7 @@ const Product = sequelize.define(
 
 Product.belongsTo(Guarantee, { foreignKey: 'guaranteeId', as: 'guarantee' });
 Product.belongsTo(Order, { foreignKey: 'orderId', as: 'order' });
+Order.hasMany(Product, { foreignKey: 'orderId', as: 'products' });
 Product.hasMany(Price, { foreignKey: 'productId', as: 'price' });
 
 export default Product;
