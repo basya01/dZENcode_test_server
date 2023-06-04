@@ -2,13 +2,13 @@ import { Sequelize } from 'sequelize';
 import config from './config.js';
 
 const sequelize = new Sequelize(
-  config.development.database,
-  config.development.username,
-  config.development.password,
+  config.production.database,
+  config.production.username,
+  config.production.password,
   {
-    host: config.development.host,
-    dialect: config.development.dialect,
-    port: config.development.port,
+    host: config.production.host,
+    dialect: config.production.dialect,
+    port: config.production.port,
   }
 );
 
