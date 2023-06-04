@@ -1,6 +1,7 @@
 import sequelize from '../index.js';
 import { DataTypes } from 'sequelize';
 import Guarantee from './Guarantee.js';
+import Order from './Order.js';
 import Price from './Price.js';
 
 const Product = sequelize.define(
@@ -34,7 +35,8 @@ const Product = sequelize.define(
   }
 );
 
-Product.hasOne(Guarantee, { foreignKey: 'productId' });
-Product.hasMany(Price, { foreignKey: 'productId' });
+Product.belongsTo(Guarantee, { foreignKey: 'guaranteeId', as: 'guarantee' });
+Product.belongsTo(Order, { foreignKey: 'orderId', as: 'order' });
+Product.hasMany(Price, { foreignKey: 'productId', as: 'price' });
 
 export default Product;

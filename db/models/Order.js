@@ -1,6 +1,5 @@
 import sequelize from '../index.js';
 import { DataTypes } from 'sequelize';
-import Product from './Product.js';
 
 const Order = sequelize.define(
   'Order',
@@ -12,7 +11,5 @@ const Order = sequelize.define(
     updatedAt: false,
   }
 );
-
-Order.hasMany(Product, { foreignKey: 'orderId' });
 
 export default Order;

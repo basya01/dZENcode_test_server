@@ -15,6 +15,6 @@ const ProductType = sequelize.define(
   }
 );
 
-ProductType.hasMany(Product, { foreignKey: 'typeId' });
+Product.belongsTo(ProductType, { foreignKey: 'typeId', as: 'type' });
 
 export default ProductType;
