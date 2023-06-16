@@ -33,7 +33,7 @@ class ProductController {
         attributes: { exclude: ['typeId', 'guaranteeId', 'orderId'] },
       });
 
-      const totalProducts = await Product.count();
+      const totalProducts = await Product.count({ where });
 
       return res.json({ products, totalProducts });
     } catch (e) {
