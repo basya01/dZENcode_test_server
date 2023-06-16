@@ -5,12 +5,19 @@ import {
   Product,
   ProductType,
 } from '../db/models/index.js';
-import ProductDTO from '../routes/dto/ProductDto.js';
+import ProductDTO from '../dto/ProductDto.js';
 
 class ProductController {
   async getAll(req, res, next) {
+    const { type } = req.query;
+
     try {
+      const where = {};
+      if (type) {
+        where.typeId = type;
+      }
       const products = await Product.findAll({
+        where,
         include: [
           {
             model: ProductType,
@@ -27,7 +34,7 @@ class ProductController {
       });
 
       const totalProducts = await Product.count();
-      
+
       return res.json({ products, totalProducts });
     } catch (e) {
       next(e);

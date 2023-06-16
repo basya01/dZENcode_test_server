@@ -5,11 +5,13 @@ import {
   Product,
   ProductType,
 } from '../db/models/index.js';
-import { OrderDTO } from '../routes/dto/index.js';
+import { OrderDTO } from '../dto/index.js';
 
 class OrderConroller {
   async getAll(req, res, next) {
     try {
+      const type = req.params;
+      console.log(type);
       const orders = await Order.findAll({
         include: {
           model: Product,
@@ -32,7 +34,7 @@ class OrderConroller {
 
       const totalOrders = await Order.count();
 
-      return res.json({orders, totalOrders});
+      return res.json({ orders, totalOrders });
     } catch (e) {
       next(e);
     }
