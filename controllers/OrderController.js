@@ -29,7 +29,10 @@ class OrderConroller {
           attributes: { exclude: ['typeId', 'guaranteeId', 'orderId'] },
         },
       });
-      return res.json(orders);
+
+      const totalOrders = await Order.count();
+
+      return res.json({orders, totalOrders});
     } catch (e) {
       next(e);
     }
