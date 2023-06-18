@@ -1,39 +1,14 @@
-import {
-  Guarantee,
-  Order,
-  Price,
-  Product,
-  ProductType,
-} from '../db/models/index.js';
+import { Product, ProductType } from '../db/models/index.js';
 import ProductDTO from '../dto/ProductDto.js';
+import { ProductService } from '../services/index.js';
 
 class ProductController {
   async getAll(req, res, next) {
     const { type } = req.query;
 
     try {
-      const where = {};
-      if (type) {
-        where.typeId = type;
-      }
-      const products = await Product.findAll({
-        where,
-        include: [
-          {
-            model: ProductType,
-            as: 'type',
-          },
-          { model: Order, as: 'order' },
-          { model: Price, as: 'price', attributes: { exclude: 'productId' } },
-          {
-            model: Guarantee,
-            as: 'guarantee',
-          },
-        ],
-        attributes: { exclude: ['typeId', 'guaranteeId', 'orderId'] },
-      });
-
-      const totalProducts = await Product.count({ where });
+      const products = await ProductService.findAll(type);
+      const totalProducts = await ProductService.getTotalCount(type);
 
       return res.json({ products, totalProducts });
     } catch (e) {

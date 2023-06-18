@@ -1,37 +1,11 @@
-import {
-  Guarantee,
-  Order,
-  Price,
-  Product,
-  ProductType,
-} from '../db/models/index.js';
+import { Order } from '../db/models/index.js';
 import { OrderDTO } from '../dto/index.js';
+import OrderService from '../services/OrderService.js';
 
 class OrderConroller {
   async getAll(req, res, next) {
     try {
-      const type = req.params;
-      console.log(type);
-      const orders = await Order.findAll({
-        include: {
-          model: Product,
-          as: 'products',
-          include: [
-            {
-              model: ProductType,
-              as: 'type',
-            },
-            { model: Order, as: 'order' },
-            { model: Price, as: 'price', attributes: { exclude: 'productId' } },
-            {
-              model: Guarantee,
-              as: 'guarantee',
-            },
-          ],
-          attributes: { exclude: ['typeId', 'guaranteeId', 'orderId'] },
-        },
-      });
-
+      const orders = await OrderService.findAll();
       const totalOrders = await Order.count();
 
       return res.json({ orders, totalOrders });
